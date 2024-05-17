@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="https://www.thymeleaf.org">
+
+<head>
+    <title>Sign_In</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <div th:replace="~{/User/Url/link.html}"></div>
+</head>
+
+<body>
+  <div th:replace="~{/User/layout/header.html}"></div>
+    <main style="margin-top: 10rem;">
+        <div class="container my-5">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-lg-6 order-lg-1 mb-4 mb-lg-0">
+                    <img th:src="@{/assets/img/973.jpg}" class="img-fluid rounded-3" alt="">
+                </div>
+                <div class="col-lg-6 order-lg-2">
+                    <div class="card border-0 rounded-3 shadow-lg">
+                        <div class="card-body p-5">
+                            <h1 class="text-center fw-bold mb-5">Đăng nhập</h1>
+    						
+                            <form class="signin-form" th:action="@{/sigin/save}" method="post">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold" for="inputEmail">Tên đăng nhập:</label>
+                                    <input type="text" id="inputEmail" class="form-control rounded-3" name="username"
+                                        placeholder="Nhập tên đăng nhập">
+                                </div>
+    
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold" for="inputPassword">Mật khẩu</label>
+                                    <input type="password" id="inputPassword" class="form-control rounded-3" name="password"
+                                        placeholder="Nhập mật khẩu">
+                                </div>
+    
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-primary rounded-3">ĐĂNG NHẬP</button>
+                                </div>
+    
+                                <div class="mt-4">
+                                    <span>Bạn quên mật khẩu? <a th:href="@{/forgot}" class="signup-link">Quên mật khẩu</a></span>
+                                </div>
+    
+                                <div class="line my-4"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <div th:replace="~{/User/layout/footer.html}"></div>
+	
+	<div th:replace="~{/User/Url/script.html}"></div>
+</body>
+
+</html>

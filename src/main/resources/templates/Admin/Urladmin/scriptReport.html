@@ -1,0 +1,143 @@
+	<script th:src="@{/assets/vendorsAdmin/plugins/jquery/jquery.min.js}"></script>
+
+	<!-- Bootstrap Core Js -->
+	<script th:src="@{/assets/vendorsAdmin/plugins/bootstrap/js/bootstrap.js}"></script>
+
+	<!-- Select Plugin Js -->
+	<!-- <script th:src="@{/assets/vendorsAdmin/plugins/bootstrap-select/js/bootstrap-select.js}"></script> -->
+
+	<!-- Slimscroll Plugin Js -->
+	<script th:src="@{/assets/vendorsAdmin/plugins/jquery-slimscroll/jquery.slimscroll.js}"></script>
+
+	<!-- Waves Effect Plugin Js -->
+	<script th:src="@{/assets/vendorsAdmin/plugins/node-waves/waves.js}"></script>
+
+	<!-- Jquery CountTo Plugin Js -->
+	<script th:src="@{/assets/vendorsAdmin/plugins/jquery-countto/jquery.countTo.js}"></script>
+
+	<!-- Morris Plugin Js -->
+	<script th:src="@{/assets/vendorsAdmin/plugins/raphael/raphael.min.js}"></script>
+	<script th:src="@{/assets/vendorsAdmin/plugins/morrisjs/morris.js}"></script>
+
+	<!-- ChartJs -->
+	<script th:src="@{/assets/vendorsAdmin/plugins/chartjs/Chart.bundle.js}"></script>
+
+	<!-- Flot Charts Plugin Js -->
+	<script th:src="@{/assets/vendorsAdmin/plugins/flot-charts/jquery.flot.js}"></script>
+	<script th:src="@{/assets/vendorsAdmin/plugins/flot-charts/jquery.flot.resize.js}"></script>
+	<script th:src="@{/assets/vendorsAdmin/plugins/flot-charts/jquery.flot.pie.js}"></script>
+	<script th:src="@{/assets/vendorsAdmin/plugins/flot-charts/jquery.flot.categories.js}"></script>
+	<script th:src="@{/assets/vendorsAdmin/plugins/flot-charts/jquery.flot.time.js}"></script>
+
+	<!-- Jquery DataTable Plugin Js -->
+	<script th:src="@{/assets/vendorsAdmin/plugins/jquery-datatable/jquery.dataTables.js}"></script>
+	<script th:src="@{/assets/vendorsAdmin/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js}"></script>
+	<script
+		th:src="@{/assets/vendorsAdmin/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js}"></script>
+	<script th:src="@{/assets/vendorsAdmin/plugins/jquery-datatable/extensions/export/buttons.flash.min.js}"></script>
+	<script th:src="@{/assets/vendorsAdmin/plugins/jquery-datatable/extensions/export/jszip.min.js}"></script>
+	<script th:src="@{/assets/vendorsAdmin/plugins/jquery-datatable/extensions/export/pdfmake.min.js}"></script>
+	<script th:src="@{/assets/vendorsAdmin/plugins/jquery-datatable/extensions/export/vfs_fonts.js}"></script>
+	<script th:src="@{/assets/vendorsAdmin/plugins/jquery-datatable/extensions/export/buttons.html5.min.js}"></script>
+	<script th:src="@{/assets/vendorsAdmin/plugins/jquery-datatable/extensions/export/buttons.print.min.js}"></script>
+
+	<!-- Sparkline Chart Plugin Js -->
+	<script th:src="@{/assets/vendorsAdmin/plugins/jquery-sparkline/jquery.sparkline.js}"></script>
+
+	<!-- Form -->
+	<!-- Jquery Validation Plugin Css -->
+	<script th:src="@{/assets/vendorsAdmin/plugins/jquery-validation/jquery.validate.js}"></script>
+
+	<!-- JQuery Steps Plugin Js -->
+	<script th:src="@{/assets/vendorsAdmin/plugins/jquery-steps/jquery.steps.js}"></script>
+
+	<!-- Sweet Alert Plugin Js -->
+	<script th:src="@{/assets/vendorsAdmin/plugins/sweetalert/sweetalert.min.js}"></script>
+
+	<script th:src="@{/assets/vendorsAdmin/js/pages/forms/form-validation.js}"></script>
+
+
+	<!-- Custom Js -->
+	<script th:src="@{/assets/vendorsAdmin/js/admin.js}"></script>
+	<script th:src="@{/assets/vendorsAdmin/js/pages/index.js}"></script>
+	<!-- Table -->
+	<script th:src="@{/assets/vendorsAdmin/js/pages/tables/jquery-datatable.js}"></script>
+
+
+	<!-- Demo Js -->
+	<script th:src="@{/assets/vendorsAdmin/js/demo.js}"></script>
+
+	<script th:src="@{/assets/vendorsAdmin/chart/Chart.min.js}"></script>
+	<script th:src="@{/assets/vendorsAdmin/js/chart.js}"></script>
+
+	<script th:src="@{/assets/vendorsAdmin/js/pages/forms/basic-form-elements.js}"></script>
+	<script th:src="@{/assets/vendorsAdmin/plugins/autosize/autosize.js}"></script>
+
+
+<script th:if="${not #strings.isEmpty(create)}">
+	swal({
+		type: "success",
+		title: "Thành Công!",
+		text: "Thêm mới thành công!",
+		showConfirmButton: false,
+		timer: 1500
+	});
+</script>
+<script th:if="${not #strings.isEmpty(update)}">
+	swal({
+		type: "success",
+		title: "Thành Công!",
+		text: "Cập nhật thành công!",
+		showConfirmButton: false,
+		timer: 1500
+	});
+</script>
+
+<script th:if="${not #strings.isEmpty(roleError)}">
+	swal({
+		title: "Xác nhận quyền truy cập!",
+		text: "Bạn không có quyền truy cập trang này!",
+		type: "error"
+	});
+</script>
+<script>
+    // Lấy đối tượng nút đăng xuất
+    var logoutButton = document.getElementById('logoutButton');
+
+    // Gán sự kiện onclick cho nút đăng xuất
+    logoutButton.onclick = function (e) {
+        // Hiển thị SweetAlert với thông báo xác nhận
+        try {
+            swal({
+                title: 'Bạn có chắc chắn muốn đăng xuất?',
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Đồng ý',
+                cancelButtonText: 'Hủy bỏ',
+            }, function (isConfirmed) {
+                // Kiểm tra xem người dùng có xác nhận không
+                if (isConfirmed) {
+                    // Thực hiện các bước đăng xuất, có thể chuyển đến URL đăng xuất hoặc thực hiện các công việc đăng xuất khác
+                    window.location.href = '/auth/logoff'; // Ví dụ chuyển hướng đến URL đăng xuất
+                } else {
+                    // Nếu người dùng nhấn Hủy bỏ, không làm gì cả
+                }
+            });
+        } catch (error) {
+            console.error("SweetAlert error:", error);
+        }
+    };
+</script>
+<!--Delete-->
+<script>
+    function confirmDelete() {
+        // Hiển thị hộp thoại xác nhận
+        var result = confirm("Bạn có chắc muốn xóa?");
+        
+        // Nếu người dùng nhấp OK, return true để tiếp tục xóa
+        // Nếu người dùng nhấp Cancel, return false để ngăn chặn xóa
+        return result;
+    }
+</script>

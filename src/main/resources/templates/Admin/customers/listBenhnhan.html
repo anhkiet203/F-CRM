@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org" >
+
+<head>
+	<title>List_Customers</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<div th:replace="~{/Admin/Urladmin/link.html}"></div>
+</head>
+
+<body class="theme-cyan">
+	<div th:replace="~{/Admin/layout/navbar.html}"></div>
+	<div th:replace="~{/Admin/layout/aside.html}"></div>
+
+
+	<section class="content">
+		<div class="container-fluid">
+			<div class="marquee">
+				<marquee behavior="scroll" direction="left" scrollamount="20">
+					CHÀO MỪNG BẠN ĐÃ ĐÊN VỚI BỆNH VIỆN MẮT VIỆT AN
+				</marquee>
+			</div>
+			<div class="row clearfix">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="card">
+						<div class="header">
+							<h2>Danh sách bệnh nhân hôm nay</h2>
+
+							<!-- <div class="header-dropdown m-r--5">
+								<a class="btn  waves-effect" th:href="@{/customersform}">
+									<i class="material-icons">add</i>
+									<span>Create</span>
+								</a>
+							</div> -->
+						</div>
+						<div class="body">
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped table-hover dataTable  js-exportable">
+									<thead>
+										<tr>
+											<th>STT</th>
+											<th>Tên đầy đủ</th>
+											<th>Địa chỉ</th>
+											<th>SĐT</th>
+											<th>Email</th>
+											<th>Giới tính</th>
+                                            <th>Ngày đến</th>
+                                            <th>Hẹn bác sĩ</th>
+                                            <th>Phương thức đến</th>
+                                            <th>Bệnh viện khám</th>
+                                            <th>Ca phẫu thuật</th>
+                                            <th>Ngày phẫu thuật</th>
+                                            <th>voucher</th>                                           
+                                            <th>Mô tả</th>
+											
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>STT</th>
+											<th>Tên đầy đủ</th>
+											<th>Địa chỉ</th>
+											<th>SĐT</th>
+											<th>Email</th>
+											<th>Giới tính</th>
+                                            <th>Ngày đến</th>
+                                            <th>Hẹn bác sĩ</th>
+                                            <th>Phương thức đến</th>
+                                            <th>Bệnh viện khám</th>
+                                            <th>Ca phẫu thuật</th>
+                                            <th>Ngày phẫu thuật</th>
+                                            <th>voucher</th>
+                                            <th>Mô tả</th>
+											
+										</tr>
+									</tfoot>
+									<tbody>
+										<tr th:each="customer, iterStat : ${customers}">
+                                            <td th:text="${iterStat.count}"></td>
+                                            <td th:text="${customer.fullname}"></td>
+                                            <td th:text="${customer.address}"></td>
+                                            <td th:text="${customer.phone}"></td>
+                                            <td th:text="${customer.email}"></td>
+                                            <td th:text="${customer.gender? 'Nam' : 'Nữ'}"></td>
+                                            <td th:text="${customer.dateLeads}"></td>
+                                            <td th:text="${customer.doctor_appointment? 'Có' : 'Không'}"></td>									
+                                            <td th:text="${customer.arrival_method}"></td>
+                                            <td th:text="${customer.hospital_examination? 'Có' : 'Không'}"></td>
+											<td th:text="${customer.surgery? 'Có' : 'Không'}"></td>
+                                            <td th:text="${customer.surgery_date}"></td>
+                                            <td th:text="${customer.voucher? 'Có' : 'Không'}"></td>                 
+                                            <td th:text="${customer.note}"></td>
+										</tr>
+										
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<div th:replace="~{Admin/Urladmin/script.html}"></div>
+</body>
+
+</html>

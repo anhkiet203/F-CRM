@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org" >
+
+<head>
+	<title>List_Crm_Entry</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<div th:replace="~{/Admin/Urladmin/link.html}"></div>
+</head>
+
+<body class="theme-cyan">
+	<div th:replace="~{/Admin/layout/navbar.html}"></div>
+	<div th:replace="~{/Admin/layout/aside.html}"></div>
+
+
+	<section class="content">
+		<div class="container-fluid">
+			<div class="marquee">
+				<marquee behavior="scroll" direction="left" scrollamount="20">
+					CHÀO MỪNG BẠN ĐÃ ĐÊN VỚI BỆNH VIỆN MẮT VIỆT AN
+				</marquee>
+			</div>
+			<div class="row clearfix">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="card">
+						<div class="header">
+							<h2>DANH SÁCH TẤT CẢ BỆNH NHÂN</h2>
+						</div>
+						<div class="body">
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped table-hover dataTable  js-exportable">
+									<thead>
+										<tr>
+											<th>STT</th>
+											<th>HỌ VÀ TÊN</th>
+											<th>GIỚI TÍNH</th>
+											<th>NĂM SINH</th>
+											<th>ĐỊA CHỈ</th>
+											<th>SĐT</th>
+											<th>ĐẾN TỪ</th>
+											<th>THÁNG</th>
+											<th>NGÀY LEAD</th>
+											<th>BSCG</th>
+											<th>KHÁM</th>
+											<th>ĐẾN BV</th>
+											<th>NGÀY KHÁM</th>
+											<th>PHẪU THUẬT</th>
+											<th>NGÀY PHẪU THUẬT</th>
+											<th>PHƯƠNG PHÁM</th>
+											<th>BS PHỤ TRÁCH</th>
+											<th>GHI CHÚ</th>
+											<th>VOUCHER</th>
+										</tr>
+									</thead>
+									
+									<tbody >
+										<tr  th:each="crm, stt : ${crms}">
+											<td th:text="*{stt.index+1}"></td>
+											<td th:text="${crm.fullname}"></td>
+											<td th:text="${crm.gender ? 'Nam' : 'Nữ'}"></td>
+											<td th:text="${crm.birthday}"></td>
+											<td th:text="${crm.address}"></td>
+											<td th:text="${crm.phone}"></td>
+											<td th:text="${crm.arrival_method}"></td>
+											<td th:text="${#dates.format(crm.dateLeads, 'MM/yyyy')}"></td>
+											<td th:text="${crm.dateLeads}"></td>
+											<td th:text="${crm.doctor_appointment ? 'Có' : 'Không'}"></td>
+											<td th:text="${crm.Appointment_date}"></td>
+											<td th:text="${crm.hospital_examination ? 'Có' : 'Không'}"></td>
+											<td th:text="${crm.treatment_date}"></td>
+											<td th:text="${crm.surgery ? 'Có' : 'Không'}"></td>
+											<td th:text="${crm.surgery_date}"></td>
+											<td th:text="${crm.methods.name}"></td>
+											<td th:text="${crm.user.fullname}"></td>
+											<td th:text="${crm.note}"></td>
+											<td th:text="${crm.voucher ? 'Có' : 'Không'}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<div th:replace="~{Admin/Urladmin/script.html}"></div>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+	integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+	crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+	integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+	crossorigin="anonymous"></script>
+<!-- Vendor JS Files -->
+<script th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+<script th:src="@{/assets/vendor/aos/aos.js}"></script>
+<script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/assets/vendor/glightbox/js/glightbox.min.js}"></script>
+<script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+<script th:src="@{/assets/vendor/php-email-form/validate.js}"></script>
+
+<!-- Template Main JS File -->
+<script th:src="@{/assets/js/main.js}"></script>
+<script th:src="@{/assets/vendorsAdmin/plugins/sweetalert/sweetalert.min.js}"></script>
+
+<script th:if="${not #strings.isEmpty(errors)}">
+	swal({
+		title: "Đăng nhập thất bại!",
+		text: "Vui lòng kiểm tra lại trông tin!",
+		type: "error"
+	});
+</script>
+<script th:if="${not #strings.isEmpty(roleError)}">
+	swal({
+		title: "Xác nhận quyền truy cập!",
+		text: "Bạn không có quyền truy cập trang này!",
+		type: "error"
+	});
+</script>
+<script th:if="${not #strings.isEmpty(pass)}" th:inline="javascript">
+    var changeMessage = /*[[${pass}]]*/ '';
+    swal({
+        type: "success",
+        title: "Thành công!",
+        text: changeMessage,
+        showConfirmButton: false,
+        timer: 1500
+    }); setTimeout(function() {
+        window.location.href = '/auth/logoff';
+    }, 1500);
+</script>

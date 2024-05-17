@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+
+<head>
+	<title>Form_Method</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<div th:replace="~{/Admin/Urladmin/link.html}"></div>
+</head>
+
+<body class="theme-cyan">
+	<div th:replace="~{/Admin/layout/navbar.html}"></div>
+	<div th:replace="~{/Admin/layout/aside.html}"></div>
+
+	<section class="content">
+		<div class="container-fluid">
+			<div class="marquee">
+				<marquee behavior="scroll" direction="left" scrollamount="20">
+					CHÀO MỪNG BẠN ĐÃ ĐÊN VỚI BỆNH VIỆN MẮT VIỆT AN
+				</marquee>
+			</div>
+			<div class="block-header">
+			</div>
+			<!-- Basic Validation -->
+			<div class="row clearfix">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="card">
+						<div class="header" style="text-align: center;">
+							<h2>CẬP NHẬT PHƯƠNG PHÁP</h2>
+						</div>
+						<div class="body">
+							<form th:action="@{/upmethod}" th:object="${method}" method="POST">
+								<input type="hidden" th:field="*{id}" />
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									<div class="form-group form-float">
+										<label class="form-label">Tên phương pháp</label>
+										<div class="form-line">
+											<input type="text" class="form-control" th:field="*{name}"
+												placeholder="Nhập tên phương pháp">
+											<label class="form-label"></label>
+										</div>
+										<i class="text-danger" th:errors="*{name}"></i>
+										<i class="text-danger">[[${messagerror}]]</i>
+									</div>
+
+								</div>
+								<div style="margin-left: 28px;">
+									<button type="submit" class="btn btn-primary btn-lg">Cập nhật</button>
+									<a class="plist btn btn-lg" th:href="@{/method}">Quay về danh sách</a>
+								</div>
+							</form>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</section>
+	<div th:replace="~{Admin/Urladmin/script.html}"></div>
+
+	<script th:if="${not #strings.isEmpty(messagess)}">
+		var successMessage = 'Sửa thành công';
+		swal({
+			type: 'success',
+			title: 'Thành công!',
+			text: successMessage,
+			confirmButtonText: 'OK'
+		});
+	</script>
+</body>
+
+</html>

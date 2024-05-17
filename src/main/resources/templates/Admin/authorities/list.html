@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+
+<head>
+	<title>List_Authorities</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<div th:replace="~{/Admin/Urladmin/linkAuthor.html}"></div>
+</head>
+
+<body class="theme-cyan">
+	<div th:replace="~{/Admin/layout/navbar.html}"></div>
+	<div th:replace="~{/Admin/layout/aside.html}"></div>
+
+
+	<section class="content">
+		<div class="container-fluid">
+			<div class="marquee">
+				<marquee behavior="scroll" direction="left" scrollamount="20">
+					CHÀO MỪNG BẠN ĐÃ ĐÊN VỚI BỆNH VIỆN MẮT VIỆT AN
+				</marquee>
+			</div>
+			
+			<div class="card">
+				<div class="card-body">
+					<h4>PHÂN QUYỀN</h4>
+					<div class="table-responsive">
+						<table class="table table-primary" ng-app="app" ng-controller="ctrl">
+							<thead>
+								<tr>
+									<th></th>
+									<th ng-repeat="role in db.roles">{{role.name}}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="acc in db.users">
+									<th>{{acc.username}}</th>
+									<th ng-repeat="role in db.roles">
+										<input type="checkbox" ng-checked="index_of(acc.username, role.id) >=0"
+											ng-click="update(acc.username, role.id)">
+									</th>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div th:replace="~{Admin/Urladmin/script.html}"></div>
+	<script th:src="@{/assets/admin/angular/author.js}"></script>
+</body>
+
+</html>

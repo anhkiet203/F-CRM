@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <head>
+        <div th:replace="~{/Admin/Urladmin/linkReport.html}"></div>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Monthly Report</title>
+
+        <style>
+            h1 {
+              color: #333;
+            }
+          
+            form {
+              margin-bottom: 20px;
+            }
+          
+            select {
+              padding: 8px;
+              margin-bottom: 10px;
+              border: 1px solid #ddd;
+              font-size: 15px;
+            }
+          
+            lable {
+              font-size: 18px;
+            }
+          
+            button {
+              padding: 8px;
+              margin-bottom: 10px;
+              background-color: blue;
+              color: white;
+              border: 1px solid #ddd;
+              font-weight: bold;
+              font-size: 13, 3px;
+              height: 38px;
+            }
+          
+            table {
+              width: 100%;
+              border-collapse: collapse;
+              margin-top: 20px;
+            }
+          
+            th,
+            td {
+              padding: 12px;
+              text-align: left;
+              border: 1px solid #ddd;
+            }
+          
+            th {
+              background-color: #f2f2f2;
+            }
+          
+            tbody tr:hover {
+              background-color: #e0e0e0;
+            }
+          </style>
+    </head>
+
+    <body class="theme-cyan">
+        <div th:replace="~{/Admin/layout/navbar.html}"></div>
+        <div th:replace="~{/Admin/layout/aside.html}"></div>
+
+        <section class="content">
+            <div class="container-fluid">
+
+            </div>
+            <h2>Danh sách bệnh nhân</h2>
+
+            <form th:action="@{/admin/monthly}" method="get"
+                th:object="${reportForm}">
+                <div >
+                    <label for="selectedMonth">Chọn tháng:</label>
+                    <select id="selectedMonth" th:field="*{selectedMonth}">
+                        <option th:each="monthNumber : ${#numbers.sequence(1, 12)}"
+                            th:value="${monthNumber}"
+                            th:text="${vietnameseMonths[monthNumber - 1]}"></option>
+                    </select>
+    
+                    <label for="selectedYear">Chọn năm:</label>
+                    <select id="selectedYear" th:field="*{selectedYear}">
+                        <!-- Add years as needed -->
+                        <option th:each="year : ${years}" th:value="${year}"
+                            th:text="${year}"></option>
+                    </select>
+    
+                    <button type="submit">Xuất danh sách</button>
+                </div>
+               
+            </form>
+
+            <!-- Display the monthly customers here -->
+            <table class="table table-bordered table-striped table-hover dataTable
+            js-exportable">
+                <thead>
+                    <tr>
+                        <th>Customer ID</th>
+                        <th>Name</th>
+                        <th>SĐT</th>
+                        <th>Giới tính</th>
+                        <th>Địa chỉ</th>
+                        <th>Ngày đến</th>
+                        <th>Ngày hẹn</th>
+                        <th>Ngày điều trị</th>
+                        <th>Ca phẫu thuật</th>
+                        <th>voucher</th>
+                        <th>Mô tả</th>
+
+                        <!-- Add more columns as needed -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="customer, iterStat : ${monthlyCustomers}">
+                        <td th:text="${iterStat.count}"></td>
+                        <!-- <td th:text="${customer.id}"></td> -->
+                        <td th:text="${customer.fullname}"></td>
+                        <td th:text="${customer.phone}"></td>
+                        <td th:text="${customer.gender? 'Nam': 'Nữ'}"></td>
+                        <td th:text="${customer.address}"></td>
+                        <td th:text="${customer.dateLeads}"></td>
+                        <td th:text="${customer.appointment_date}"></td>
+                        <td th:text="${customer.treatment_date}"></td>
+                        <td th:text="${customer.surgery? 'Có' : 'Không'}"></td>
+                        <td th:text="${customer.voucher? 'Có' : 'Không'}"></td>
+                        <td th:text="${customer.note}"></td>
+
+
+                        <!-- Add more cells as needed -->
+                    </tr>
+                </tbody>
+            </table>
+            <div th:replace="~{Admin/Urladmin/scriptReport.html}"></div>
+        </body>
+
+    </html>

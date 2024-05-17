@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+
+<head>
+	<title>Form_Customers</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<div th:replace="~{/Admin/Urladmin/link.html}"></div>
+</head>
+
+<body class="theme-cyan">
+	<div th:replace="~{/Admin/layout/navbar.html}"></div>
+	<div th:replace="~{/Admin/layout/aside.html}"></div>
+
+	<section class="content">
+		<div class="container-fluid">
+			<div class="marquee">
+				<marquee behavior="scroll" direction="left" scrollamount="20">
+					CHÀO MỪNG BẠN ĐÃ ĐÊN VỚI BỆNH VIỆN MẮT VIỆT AN
+				</marquee>
+			</div>
+			<div class="block-header">
+
+			</div>
+			<!-- Basic Validation -->
+			<div class="row clearfix">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="card">
+						<div class="header" style="text-align: center;">
+							<h2>CẬP NHẬT KHÁCH HÀNG</h2>
+
+						</div>
+						<div class="body">
+							<form method="POST" th:action="@{/customers/edit/{id}(id=${customer.id})}"
+								th:object="${customer}">
+
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group form-float">
+											<label class="form-label">Họ và tên:</label>
+											<div class="form-line">
+												<input type="text" class="form-control" name="fullname"
+													th:field="*{fullname}" placeholder="Nhập họ và tên">
+
+											</div>
+											<i class="text-danger" th:errors="*{fullname}"></i>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group form-float">
+											<label class="form-label">Địa chỉ:</label>
+											<div class="form-line">
+												<input type="text" class="form-control" name="address"
+													th:field="*{address}" placeholder="Nhập địa chỉ">
+												<label class="form-label"></label>
+											</div>
+											<i class="text-danger" th:errors="*{address}"></i>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group form-float">
+											<label class="form-label">Số điện thoại:</label>
+											<div class="form-line">
+												<input type="text" class="form-control" name="phone" th:field="*{phone}"
+													placeholder="Nhập số điện thoại">
+
+											</div>
+											<i class="text-danger" th:errors="*{phone}"></i>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+									<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group form-float">
+											<label class="form-label">Email:</label>
+											<div class="form-line">
+												<input type="email" class="form-control" name="email"
+													th:field="*{email}" placeholder="Nhập email">
+
+											</div>
+											<i class="text-danger" th:errors="*{email}"></i>
+											<i class="text-danger" th:text="${email}"></i>
+										</div>
+									</div>
+
+									<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group">
+											<label class="form-label">Giới tính:</label><br>
+											<input type="radio" name="gender" id="nam" class="with-gap"
+												th:field="*{gender}" th:value="true">
+											<label for="nam">Nam</label>
+
+											<input type="radio" name="gender" id="nu" class="with-gap"
+												th:field="*{gender}" th:value="false">
+											<label for="nu" class="m-l-20">Nữ</label>
+										</div>
+										<i class="text-danger" th:errors="*{gender}"></i>
+									</div>
+
+									<!-- Select -->
+
+									<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group form-float">
+											<label class="form-label" for="birthday">Ngày tháng năm sinh:</label>
+											<div class="form-line">
+												<input type="date" class="form-control" name="birthday" id="birthday"
+													th:field="*{birthday}">
+											</div>
+											<i class="text-danger" th:text="${birthday}"></i>
+										</div>
+									</div>
+								</div>
+
+
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group form-float">
+											<label class="form-label">Đến từ:</label>
+											<select class="form-control show-tick" th:field="*{arrival_method}">
+												<option value="">-- Phương thức đến --</option>
+												<option th:value="Fanpage">Fanpage</option>
+												<option th:value="Landing_page">Landing page</option>
+												<option th:value="Relatives_introduced">Người thân giới thiệu</option>
+												<option th:value="Collaborators">Cộng tác viên</option>
+												<option th:value="by_yourself">Tự đến</option>
+												<option th:value="Hotline">Hotline</option>
+											</select>
+											<i class="text-danger" th:text="${arr}"></i>
+										</div>
+
+									</div>
+
+									<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group form-float">
+											<label class="form-label" for="appointment_date">Ngày hẹn:</label>
+											<div class="form-line">
+												<input type="date" class="form-control" name="appointment_date"
+													id="appointment_date" th:field="*{appointment_date}">
+
+											</div>
+											<i class="text-danger" th:text="${ap}"></i>
+											<span th:if="${#fields.hasErrors('appointment_date')}"
+												class="text-danger">Ngày hẹn phải là ngày hiện tại hoặc sau ngày hiện
+												tại</span>
+										</div>
+
+									</div>
+									<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group form-float">
+											<label class="form-label" for="treatment_date">Ngày khám tại bệnh
+												viện:</label>
+											<div class="form-line">
+												<input type="date" class="form-control" id="treatment_date"
+													name="treatment_date" th:field="*{treatment_date}">
+											</div>
+											<i class="text-danger" th:text="${tr}"></i>
+											<span th:if="${#fields.hasErrors('treatment_date')}"
+												class="text-danger">Ngày khám phải là ngày hẹn hoặc sau ngày hẹn</span>
+										</div>
+									</div>
+								</div>
+
+
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+
+									<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group form-float">
+											<label class="form-label" for="surgery_date">Ngày phẫu thuật:</label>
+											<div class="form-line">
+												<input type="date" class="form-control" name="surgery_date"
+													id="surgery_date" th:field="*{surgery_date}">
+
+
+											</div>
+											<i class="text-danger" th:text="${su}"></i>
+											<span th:if="${#fields.hasErrors('surgery_date')}" class="text-danger">Ngày
+												phẫu thuật phải là ngày hiện tại hoặc sau ngày hiện tại</span>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group">
+											<label class="form-label">Tên bác sĩ</label>
+											<select class="form-control show-tick" th:field="*{user.username}">
+												<option value="">-- Bác sĩ --</option>
+												<option th:each="doctorRoleId : ${usersDoctor}"
+													th:value="${doctorRoleId.user.username}"
+													th:text="${doctorRoleId.user.fullname}"></option>
+											</select>
+											<i class="text-danger" th:text="${us}"></i>
+										</div>
+									</div>
+
+									<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group">
+											<label class="form-label">Phương pháp điều trị</label>
+											<select class="form-control show-tick " id="selectsports"
+												th:field="*{methods.id}">
+												<option value="">-- Phương pháp --</option>
+												<option th:each="customer : ${methods}" th:value="${customer.id}"
+													th:text="${customer.name}"></option>
+											</select>
+											<i class="text-danger" th:text="${me}"></i>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+
+									<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group">
+											<label class="form-label">Hẹn bác sĩ chuyên gia:</label><br>
+											<input type="radio" name="doctorBK" id="co" class="with-gap"
+												th:field="*{doctor_appointment}" th:value="true">
+											<label for="co">Có</label>
+
+											<input type="radio" name="doctorBK" id="khong" class="with-gap"
+												th:field="*{doctor_appointment}" th:value="false">
+											<label for="khong" class="m-l-20">Không</label>
+										</div>
+									</div>
+
+									<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group">
+											<label class="form-label">Khám tại bệnh viên:</label><br>
+											<input type="radio" name="check_at" id="co1" class="with-gap"
+												th:field="*{hospital_examination}" th:value="true">
+											<label for="co1">Có</label>
+
+											<input type="radio" name="check_at" id="khong1" class="with-gap"
+												th:field="*{hospital_examination}" th:value="false">
+											<label for="khong1" class="m-l-20">Không</label>
+										</div>
+									</div>
+									<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group">
+											<label class="form-label">Phẫu thuật:</label><br>
+											<input type="radio" name="surgery" id="co2" class="with-gap"
+												th:field="*{surgery}" th:value="true">
+											<label for="co2">Có</label>
+
+											<input type="radio" name="surgery" id="khong2" class="with-gap"
+												th:field="*{surgery}" th:value="false">
+											<label for="khong2" class="m-l-20">Không</label>
+										</div>
+									</div>
+
+									<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group">
+											<label class="form-label">Voucher:</label><br>
+											<input type="radio" name="Voucher" id="co3" class="with-gap"
+												th:field="*{voucher}" th:value="true">
+											<label for="co3">Có</label>
+
+											<input type="radio" name="Voucher" id="khong3" class="with-gap"
+												th:field="*{voucher}" th:value="false">
+											<label for="khong3" class="m-l-20">Không</label>
+										</div>
+									</div>
+
+
+								</div>
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									<div class="form-group form-float">
+										<label class="form-label">Ghi chú:</label>
+										<div class="form-line">
+											<textarea name="description" cols="30" rows="5"
+												class="form-control no-resize" placeholder="Nhập ghi chú"
+												th:field="*{note}"></textarea>
+
+										</div>
+									</div>
+								</div>
+								<div class="buttonSubmit" style="margin-left: 1rem;">
+									<button class="btn btn-primary btn-lg"  id="submit">Cập
+										nhật</button>
+									<a class="plist btn btn-lg" th:href="@{/customers}">Quay về danh sách</a>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div th:replace="~{Admin/Urladmin/script.html}"></div>
+
+
+</body>
+
+</html>

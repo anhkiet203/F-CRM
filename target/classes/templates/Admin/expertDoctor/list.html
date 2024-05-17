@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+
+<head>
+	<title>List_ExpertDoctor</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<div th:replace="~{/Admin/Urladmin/link.html}"></div>
+</head>
+
+<body class="theme-cyan">
+	<div th:replace="~{/Admin/layout/navbar.html}"></div>
+	<div th:replace="~{/Admin/layout/aside.html}"></div>
+
+	<section class="content">
+		<div class="container-fluid">
+			<div class="marquee">
+				<marquee behavior="scroll" direction="left" scrollamount="20">
+					CHÀO MỪNG BẠN ĐÃ ĐẾN VỚI BỆNH VIỆN MẮT VIỆT AN
+				</marquee>
+			</div>
+			<div class="row clearfix">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="card">
+						<div class="header">
+							<h2>DANH SÁCH CHUYÊN NGÀNH</h2>
+							<div class="header-dropdown m-r--5">
+								<!-- Sửa đường dẫn để đến trang tạo mới -->
+								<a class="btn waves-effect" th:href="@{/doctorform}">
+									<i class="material-icons">add</i>
+									<span>Create</span>
+								</a>
+							</div>
+						</div>
+						<div class="body">
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped table-hover dataTable js-exportable">
+									<thead>
+										<tr>
+											<th>STT</th>
+											<th>Tên chuyên ngành</th>
+											<th>Chức năng</th>
+										</tr>
+									</thead>
+									<tbody>
+										<!-- Sử dụng Thymeleaf để lặp qua danh sách chuyên ngành từ controller -->
+										<tr th:each="expdtc : ${expdtc}">
+											<td th:text="${expdtc.id}"></td>
+											<td th:text="${expdtc.name}"></td>
+											<td>
+												<!-- Sử dụng Thymeleaf URL để tạo liên kết sửa -->
+												<a th:href="@{/doctorform/{id}(id=${expdtc.id})}">
+													<img th:src="@{/assets/vendorsAdmin/images/edit6.png}" alt="Edit"
+														width="30" height="30">
+												</a>
+												<!-- Sử dụng Thymeleaf để tạo liên kết xóa và gọi hàm xác nhận -->
+												<a th:onclick="'return confirmDelete(' + ${expdtc.id} + ');'">
+													<img th:src="@{/assets/vendorsAdmin/images/delete.png}" alt="Delete"
+														width="30" height="30">
+												</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div th:replace="~{Admin/Urladmin/script.html}"></div>
+	<script>
+		function confirmDelete(id) {
+			swal({
+			title: 'Bạn có chắc muốn xóa không?',
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: 'Có',
+			cancelButtonText: 'Không',
+			closeOnConfirm: false
+		},
+			function () {
+				window.location.href = '/changeStatusdoc/' + id;
+			});
+			return false;
+		}
+
+		
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+
+<head>
+	<titlr>Form_User</titlr>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<div th:replace="~{/Admin/Urladmin/link.html}"></div>
+</head>
+
+<body class="theme-cyan">
+	<div th:replace="~{/Admin/layout/navbar.html}"></div>
+	<div th:replace="~{/Admin/layout/aside.html}"></div>
+
+	<section class="content">
+		<div class="container-fluid">
+			<div class="marquee">
+				<marquee behavior="scroll" direction="left" scrollamount="20">
+					CHÀO MỪNG BẠN ĐÃ ĐÊN VỚI BỆNH VIỆN MẮT VIỆT AN. RẤT VUI ĐƯỢC ĐỒNG HÀNH CÙNG CÁC BẠN.
+				</marquee>
+			</div>
+			<div class="block-header">
+
+			</div>
+			<!-- Basic Validation -->
+			<div class="row clearfix">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="card">
+						<div class="header" style="text-align: center; background-color: #00bcd0">
+							<h2 style="color: white;">CẬP NHẬT NHÂN VIÊN</h2>
+
+						</div>
+						<div class="body">
+							<form method="POST" th:action="@{/edit/{username}(username=${user.username})}"
+								th:object="${user}" style=" margin-bottom: 5rem;" enctype="multipart/form-data">
+								<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 ">
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group form-float">
+											<label class="form-label">Tên đăng nhập</label>
+											<div class="form-line">
+												<input type="text" class="form-control" th:field="*{username}" disabled
+													name="username" placeholder="Nhập tên đăng nhập">
+											</div>
+										</div>
+									</div>
+
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group form-float">
+											<label class="form-label">Họ và tên</label>
+											<div class="form-line">
+												<input type="text" class="form-control" th:field="*{fullname}"
+													name="fullname" placeholder="Nhập họ và tên">
+
+											</div>
+											<i class="text-danger" th:text="${fullname}"></i>
+										</div>
+									</div>
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group form-float">
+											<label class="form-label">Địa chỉ</label>
+											<div class="form-line">
+												<input type="text" class="form-control" th:field="*{address}"
+													name="address" placeholder="Nhập địa chỉ">
+
+											</div>
+											<i class="text-danger" th:text="${address}"></i>
+										</div>
+									</div>
+									
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group form-float">
+											<label class="form-label">Chọn hình ảnh:</label>
+											<div class="form-line">
+												<input type="file" class="form-control" name="image" accept="image/*">
+												<!--<input type="text" th:field="*{photo}" 
+													name="image">-->
+											</div>
+											<!--<i class="text-danger" th:text="${photo_message}"></i>-->
+										</div>
+									</div>
+								</div>
+								
+								<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 5rem;">
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group form-float">
+											<label class="form-label">Số điện thoại</label>
+											<div class="form-line">
+												<input type="text" class="form-control" th:field="*{phone}" name="phone"
+													placeholder="Nhập số điện thoại">
+
+											</div>
+											<i class="text-danger" th:text="${phone}"></i>
+										</div>
+									</div>
+									
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group form-float">
+											<label class="form-label">Email</label>
+											<div class="form-line">
+												<input type="text" class="form-control" th:field="*{email}"
+													name="Email" placeholder="Nhập email">
+
+											</div>
+											<i class="text-danger" th:text="${email}"></i>
+										</div>
+									</div>
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 4px;">
+										<div class="form-group">
+											<label class="form-label">Giới tính</label><br>
+											<input type="radio" name="gender" id="nam" th:field="*{gender}"
+												th:value="true" class="with-gap">
+											<label for="nam">Nam</label>
+
+											<input type="radio" name="gender" id="nu" th:field="*{gender}"
+												th:value="false" class="with-gap">
+											<label for="nu" class="m-l-20">Nữ</label>
+
+										</div>
+										<i class="text-danger" th:errors="*{gender}"></i>
+									</div>
+									<!-- Select -->
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group">
+											<label class="form-label">Chuyên ngành</label>
+											<select class="form-control show-tick " id="selectsports"
+												th:field="*{expertdoctor.id}">
+												<option value="">-- Chuyên ngành --</option>
+												<option th:each="user : ${expertdoctors}" th:value="${user.id}"
+													th:text="${user.name}"></option>
+											</select>
+											<i class="text-danger">[[${expertdoctor}]]</i>
+										</div>
+									</div>
+								</div>
+								<div class="buttonSubmit" >
+									<button class="btn btn-primary btn-lg" style="margin-left: 4rem;">Cập
+										nhật</button>
+									<a class="plist btn btn-lg" th:href="@{/user}">Quay về danh sách</a>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div th:replace="~{Admin/Urladmin/script.html}"></div>
+
+</body>
+
+</html>

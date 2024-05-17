@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+
+<head>
+	<title>Report</title>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1,
+      user-scalable=no" name="viewport" />
+	<div th:replace="~{/Admin/Urladmin/linkReport.html}"></div>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<style>
+	h1 {
+		color: #333;
+	}
+
+	form {
+		margin-bottom: 20px;
+	}
+
+	select {
+		padding: 8px;
+		margin-bottom: 10px;
+		border: 1px solid #ddd;
+		font-size: 15px;
+	}
+
+	lable {
+		font-size: 18px;
+	}
+
+	button {
+		padding: 8px;
+		margin-bottom: 10px;
+		background-color: blue;
+		color: white;
+		border: 1px solid #ddd;
+		font-weight: bold;
+		font-size: 13, 3px;
+		height: 38px;
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		margin-top: 20px;
+	}
+
+	th,
+	td {
+		padding: 12px;
+		text-align: left;
+		border: 1px solid #ddd;
+	}
+
+	th {
+		background-color: #f2f2f2;
+	}
+
+	tbody tr:hover {
+		background-color: #e0e0e0;
+	}
+</style>
+
+<body class="theme-cyan">
+	<div th:replace="~{/Admin/layout/navbar.html}"></div>
+	<div th:replace="~{/Admin/layout/aside.html}"></div>
+
+	<section class="content">
+		<div class="container-fluid">
+			<div class="marquee">
+				<marquee behavior="scroll" direction="left" scrollamount="20">
+					CHÀO MỪNG BẠN ĐÃ ĐÊN VỚI BỆNH VIỆN MẮT VIỆT AN
+				</marquee>
+			</div>
+			<div class="row clearfix">
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+					<div class="info-box hover-expand-effect" style="background-color: #eeb4be">
+						<div class="icon">
+							<i class="material-icons">playlist_add_check</i>
+						</div>
+						<div class="content">
+							<div class="text">BỆNH NHÂN TRONG NGÀY</div>
+							<div data-speed="15" data-fresh-interval="20">
+								<span style="font-size: 25px" th:text="${dailyCustomerCount}"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+					<div class="info-box hover-expand-effect" style="background-color: #f7dea8">
+						<div class="icon">
+							<i class="material-icons">help</i>
+						</div>
+						<div class="content">
+							<div class="text">BỆNH NHÂN TRONG TUẦN</div>
+							<div data-speed="1000" data-fresh-interval="20">
+								<span style="font-size: 25px" th:text="${weeklyCustomerCount}"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+					<div class="info-box hover-expand-effect" style="background-color: #e6e6fa">
+						<div class="icon">
+							<i class="material-icons">forum</i>
+						</div>
+						<div class="content">
+							<div class="text">BỆNH NHÂN TRONG THÁNG</div>
+							<div data-speed="1000" data-fresh-interval="20">
+								<span style="font-size: 25px" th:text="${monthlyCustomerCount}"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+					<div class="info-box hover-expand-effect" style="background-color: #add8e6">
+						<div class="icon">
+							<i class="material-icons">person_add</i>
+						</div>
+						<div class="content">
+							<div class="text">BỆNH NHÂN TRONG NĂM</div>
+							<div data-speed="1000" data-fresh-interval="20">
+								<span style="font-size: 25px" th:text="${yearlyCustomerCount}"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					<div class="col-12 col-lg-8 col-md-4">
+						<!-- biểu đồ cột -->
+						<canvas id="barChart" th:style="'width: 100px; height: 50px;'"></canvas>
+						<div style="font-size: 20px; text-align: center; margin-top: 5px;">
+							<a th:href="@{admin/monthly}" >Danh sách chi
+								tiết bệnh nhân</a>
+						</div>
+						
+
+						<!-- Thêm đoạn mã biểu đồ cột JavaScript -->
+						<script th:inline="javascript">
+							/* Dữ liệu từ controller */
+							var monthlyCustomerCounts = /*[[${monthlyCustomerCounts}]]*/[];
+
+							/* Tạo biểu đồ cột */
+							var ctx = document.getElementById('barChart').getContext('2d');
+							var barChart = new Chart(ctx, {
+								type: 'bar',
+								data: {
+									labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+									datasets: [{
+										label: 'Số bệnh nhân',
+										data: monthlyCustomerCounts,
+										backgroundColor: 'rgba(75, 192, 192, 0.5)', // Màu nền
+										borderColor: 'rgba(75, 192, 192, 1)', // Màu đường biên
+										borderWidth: 2 // Độ rộng của đường biên
+									}]
+								},
+								options: {
+									animation: {
+										duration: 2000, // Thời gian của hiệu ứng (milliseconds)
+										easing: 'easeInOutQuart' // Kiểu của hiệu ứng
+									},
+									scales: {
+										y: {
+											beginAtZero: true
+										}
+									}
+								}
+							});
+						</script>
+					</div>
+					<div class="col-12 col-lg-4 col-md-4">
+						<!--biểu đồ tròn-->
+						<canvas id="pieChart" th:style="'width: 450px; height: 500px;'"></canvas>
+						<script th:inline="javascript">
+							var yearlyCustomerCounts = /*[[${yearlyCustomerCounts}]]*/[];
+
+							var ctx = document.getElementById('pieChart').getContext('2d');
+							var pieChart = new Chart(ctx, {
+								type: 'pie',
+								data: {
+									labels: /*[[${years}]]*/[],
+									datasets: [{
+										label: 'Số bệnh nhân',
+										data: yearlyCustomerCounts,
+										backgroundColor: [
+											'rgba(255, 99, 132, 0.7)',
+											'rgba(54, 162, 235, 0.7)',
+											'rgba(255, 206, 86, 0.7)',
+											'rgba(75, 192, 192, 0.7)',
+											'rgba(153, 102, 255, 0.7)',
+											'rgba(255, 159, 64, 0.7)'
+										]
+									}]
+								},
+								options: {
+									maintainAspectRatio: false,
+									responsive: false,
+								}
+							});
+						</script>
+					</div>
+				</div>
+			</div>
+
+
+
+	</section>
+
+	<div th:replace="~{Admin/Urladmin/scriptReport.html}"></div>
+</body>
+<!-- Hiển thị biểu đồ cột -->
+<!-- Hiển thị biểu đồ cột với kích thước nhỏ hơn -->
+
+
+</html>
